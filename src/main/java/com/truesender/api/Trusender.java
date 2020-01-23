@@ -83,6 +83,9 @@ public class Trusender {
         try {
         	httpclient = HttpClients.createDefault();
         	HttpPost httpPost = new HttpPost("https://api.trusender.com/v1/sendEmail");
+        	httpPost.addHeader("Accept", "application/json");
+        	httpPost.addHeader("Content-Type", "application/json");
+        	
         	List<NameValuePair> nvps = new ArrayList<NameValuePair> ();
         	nvps.add(new BasicNameValuePair("auth_token", authToken));
         	nvps.add(new BasicNameValuePair("email", toAddress));
