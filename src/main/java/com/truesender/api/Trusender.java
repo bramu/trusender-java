@@ -11,6 +11,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -77,7 +79,7 @@ public class Trusender {
 		return jo;
 	}
 	
-	public static JSONObject sendEmail(String authToken, String templateName, String toAddress, String dataMapping) {
+	public static JSONObject sendEmail(String authToken, String templateName, String toAddress, JSONObject dataMapping) {
 		final JSONObject jo = new JSONObject();
 		CloseableHttpClient httpclient = null;
         try {
@@ -86,12 +88,14 @@ public class Trusender {
         	httpPost.addHeader("Accept", "application/json");
         	httpPost.addHeader("Content-Type", "application/json");
         	
-        	List<NameValuePair> nvps = new ArrayList<NameValuePair> ();
-        	nvps.add(new BasicNameValuePair("auth_token", authToken));
-        	nvps.add(new BasicNameValuePair("email", toAddress));
-        	nvps.add(new BasicNameValuePair("template_name", templateName));
-        	nvps.add(new BasicNameValuePair("data_mapping", dataMapping));
-        	httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+        	JSONObject sendJson = new JSONObject();
+        	sendJson.put("auth_token", authToken);
+        	sendJson.put("email", "toAddress");
+        	sendJson.put("template_name", templateName);
+        	sendJson.put("data_mapping", dataMapping);
+        	
+        	HttpEntity stringEntity = new StringEntity(sendJson.toString(),ContentType.APPLICATION_JSON);
+        	httpPost.setEntity(stringEntity);
 
             System.out.println("Executing request " + httpPost.getRequestLine());
 
