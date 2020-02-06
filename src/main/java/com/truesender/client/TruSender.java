@@ -133,8 +133,6 @@ public class TruSender {
 			}
         }
 		return jo;
-	
-		
 	}
 	
 }
