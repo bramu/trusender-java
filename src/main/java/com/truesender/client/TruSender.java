@@ -1,4 +1,4 @@
-package com.truesender.api;
+package com.truesender.client;
 
 import java.io.IOException;
 
@@ -14,10 +14,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-public class Trusender {
+public class TruSender {
 	
 	
-	public static JSONObject sendEvent(String authToken, String templateName, String emailAddress, JSONObject properties) {
+	public static JSONObject sendEvent(String authToken, String emailAddress, String eventName, JSONObject properties) {
 		final JSONObject jo = new JSONObject();
 		CloseableHttpClient httpclient = null;
         try {
@@ -29,7 +29,7 @@ public class Trusender {
         	JSONObject sendJson = new JSONObject();
         	sendJson.put("auth_token", authToken);
         	sendJson.put("email", emailAddress);
-        	sendJson.put("template_name", templateName);
+        	sendJson.put("name", eventName);
         	sendJson.put("properties", properties);
         	
         	HttpEntity stringEntity = new StringEntity(sendJson.toString(),ContentType.APPLICATION_JSON);
@@ -76,7 +76,7 @@ public class Trusender {
 		return jo;
 	}
 	
-	public static JSONObject sendEmail(String authToken, String templateName, String toAddress, JSONObject dataMapping) {
+	public static JSONObject sendEmail(String authToken, String toAddress, String templateName, JSONObject dataMapping) {
 		final JSONObject jo = new JSONObject();
 		CloseableHttpClient httpclient = null;
         try {
