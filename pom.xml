@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.trusender</groupId>
   <artifactId>trusender-java</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   
   
 	<name>trusender-java</name>
@@ -39,7 +39,6 @@
 		<connection>scm:git:git://github.com/bramu/trusender-java.git</connection>
 		<developerConnection>scm:git:git@github.com:bramu/bramu.git</developerConnection>
 		<url>https://github.com/bramu/trusender-java</url>
-		<tag>trusender-java-1.0.0</tag>
 	</scm>
 	
 	
@@ -163,10 +162,10 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>${version.maven-release-plugin}</version>
 				<configuration>
-				<localCheckout>true</localCheckout>
-				<pushChanges>false</pushChanges>
-				<mavenExecutorId>forked-path</mavenExecutorId>
-				<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+					<localCheckout>true</localCheckout>
+					<pushChanges>false</pushChanges>
+					<mavenExecutorId>forked-path</mavenExecutorId>
+					<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
 				</configuration>
 				<dependencies>
 					<dependency>
